@@ -263,6 +263,9 @@ require("gitsigns").setup {
 	},
 }
 
+-- LSP
+local lspconfig = require "lspconfig"
+
 -- Telescope fuzzy finder
 local telescope = require "telescope"
 telescope.setup {
@@ -294,7 +297,6 @@ require("nvim-treesitter.configs").setup {
 }
 
 -- Atomatic Language Server download
-local lspconfig = require "lspconfig"
 require("mason").setup {}
 
 local servers = {
