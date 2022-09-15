@@ -50,6 +50,7 @@ vim.o.splitright = true
 vim.o.tabstop = 2
 vim.o.termguicolors = true
 vim.o.updatetime = 100
+vim.o.swapfile = false
 vim.wo.wrap = false
 
 vim.g.mapleader = " "
@@ -66,7 +67,7 @@ vim.keymap.set("n", "<Leader>q", ":bprevious<CR>:bdelete #<CR>", { silent = true
 vim.keymap.set("n", "<Leader>y", ":%y<CR>")
 vim.keymap.set("n", "k", "gk", { silent = true })
 vim.keymap.set("n", "j", "gj", { silent = true })
-vim.keymap.set("n", "<Leader>l", ":vsplit term://fish <CR>", { silent = true })
+vim.keymap.set("n", "<Leader>l", ":vsplit term://bash <CR>", { silent = true })
 vim.keymap.set("t", "<Leader><Esc>", "<C-\\><C-n>", { silent = true })
 vim.keymap.set("n", "<Leader>v", ":edit ~/.config/nvim/init.lua<CR>", { silent = true })
 vim.keymap.set({ "n", "v" }, "<Leader>c", ":Commentary<CR>", { silent = true })
@@ -103,6 +104,9 @@ vim.api.nvim_create_autocmd("InsertLeave", { command = "set relativenumber", pat
 vim.api.nvim_create_autocmd("TermOpen", { command = "startinsert", pattern = "*" })
 vim.api.nvim_create_autocmd("BufWinEnter", { command = "set noexpandtab tabstop=2 shiftwidth=2", pattern = "*.rs" })
 vim.api.nvim_create_autocmd("BufWinEnter", { command = "set filetype=astro", pattern = "*.astro" })
+
+-- auto compile scss
+vim.api.nvim_create_autocmd("BufWritePost", { command = "!sass %:p %:r.css", pattern = "*.scss" })
 
 -- Error Sign on the left
 vim.cmd "sign define DiagnosticSignError text=● texthl=DiagnosticSignError"
@@ -304,7 +308,7 @@ require("mason").setup {}
 local servers = {
 	"bashls",
 	"cssls",
-	"gopls",
+	-- "gopls",
 	"html",
 	"tsserver",
 }
