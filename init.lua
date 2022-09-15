@@ -43,7 +43,7 @@ vim.o.ignorecase = true
 vim.o.lazyredraw = true
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.scrolloff = 4
+vim.o.scrolloff = 8
 vim.o.shiftwidth = 2
 vim.o.splitbelow = true
 vim.o.splitright = true
@@ -79,6 +79,7 @@ local lang_maps = {
 	sh = { exec = "./%" },
 	go = { build = "go build", exec = "go run %" },
 	rust = { exec = "cargo run" },
+	html = { exec = "npx serve"},
 }
 for lang, data in pairs(lang_maps) do
 	if data.build ~= nil then
