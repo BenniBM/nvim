@@ -116,7 +116,9 @@ vim.cmd "sign define DiagnosticSignHint text=● texthl=DiagnosticSignHint"
 
 vim.diagnostic.config { virtual_text = false }
 
+-------------------------------------------------------------------------
 ----------------------------Plugin Config--------------------------------
+-------------------------------------------------------------------------
 
 -- Presence on UI
 require("presence"):setup {
@@ -131,6 +133,7 @@ require("presence"):setup {
 -- Color Scheme
 vim.g.catppuccin_flavour = "mocha"
 vim.cmd "colorscheme catppuccin"
+vim.cmd "hi Normal guibg=NONE ctermbg=NONE"
 
 -- Dashboard when opening Neovim
 local db = require "dashboard"
