@@ -38,6 +38,8 @@ require("packer").startup(function(use)
 	use "windwp/nvim-autopairs"
 end)
 
+vim.o.exrc = true
+
 vim.o.clipboard = "unnamedplus"
 vim.o.ignorecase = true
 vim.o.lazyredraw = true
@@ -55,6 +57,8 @@ vim.wo.wrap = false
 
 vim.g.mapleader = " "
 
+-- Shortcuts --
+
 vim.keymap.set("i", "jj", "<esc>", { silent = true })
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 vim.keymap.set("n", "<Leader>w", "<C-w>k")
@@ -65,9 +69,10 @@ vim.keymap.set("n", "<Leader>j", ":bprevious<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>k", ":bnext<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>q", ":bprevious<CR>:bdelete #<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>y", ":%y<CR>")
+vim.keymap.set("n", "<Leader>x", ":Lex<CR>:vertical resize 30<CR>")
 vim.keymap.set("n", "k", "gk", { silent = true })
 vim.keymap.set("n", "j", "gj", { silent = true })
-vim.keymap.set("n", "<Leader>l", ":vsplit term://bash <CR>", { silent = true })
+vim.keymap.set("n", "<Leader>l", ":vsplit term://zsh <CR>", { silent = true })
 vim.keymap.set("t", "<Leader><Esc>", "<C-\\><C-n>", { silent = true })
 vim.keymap.set("n", "<Leader>v", ":edit ~/.config/nvim/init.lua<CR>", { silent = true })
 vim.keymap.set({ "n", "v" }, "<Leader>c", ":Commentary<CR>", { silent = true })
@@ -97,7 +102,7 @@ for lang, data in pairs(lang_maps) do
 end
 vim.api.nvim_create_autocmd("BufWritePre", {
 	command = "lua vim.lsp.buf.formatting_sync(nil, 1000)",
-	pattern = "*.astro,*.cpp,*.css,*.go,*.h,*.html,*.js,*.json,*.jsx,*.lua,*.md,*.py,*.rs,*.ts,*.tsx,*.yaml",
+	pattern = "*.css,*.go,*.html,*.js,*.json,*.jsx,*.lua,*.md,*.py,*.ts,*.tsx,*.yaml",
 })
 vim.api.nvim_create_autocmd("InsertEnter", { command = "set norelativenumber", pattern = "*" })
 vim.api.nvim_create_autocmd("InsertLeave", { command = "set relativenumber", pattern = "*" })
@@ -311,9 +316,10 @@ require("mason").setup {}
 local servers = {
 	"bashls",
 	"cssls",
-	-- "gopls",
+	"gopls",
 	"html",
 	"tsserver",
+	"emmet_ls",
 }
 local has_formatter = { "gopls", "html", "tsserver" }
 require("mason-lspconfig").setup {
