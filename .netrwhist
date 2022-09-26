@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/home/rbook/web/rb-dev.loc'
+let g:netrw_dirhist_2='/home/rbook/web/rb-dev.loc/private/include'
+let g:netrw_dirhist_1='/home/rbook/web/rb-dev.loc/private'
+let g:netrw_dirhist_0='/home/rbook/web/rb-dev.loc'
+let g:netrw_dirhist_9='/home/rbook/web/rb-dev.loc/private/include'
+let g:netrw_dirhist_8='/home/rbook/web/rb-dev.loc/private'
+let g:netrw_dirhist_7='/home/rbook/web/rb-dev.loc'
+let g:netrw_dirhist_6='/home/rbook/web/rb-dev.loc/private/include'
+let g:netrw_dirhist_5='/home/rbook/web/rb-dev.loc/private'
+let g:netrw_dirhist_4='/home/rbook/web/rb-dev.loc'

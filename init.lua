@@ -65,6 +65,7 @@ vim.keymap.set("n", "<Leader>w", "<C-w>k")
 vim.keymap.set("n", "<Leader>a", "<C-w>h")
 vim.keymap.set("n", "<Leader>s", "<C-w>j")
 vim.keymap.set("n", "<Leader>d", "<C-w>l")
+vim.keymap.set("n", "<Leader>g", ":update<CR>")
 vim.keymap.set("n", "<Leader>j", ":bprevious<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>k", ":bnext<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>q", ":bprevious<CR>:bdelete #<CR>", { silent = true })
@@ -192,6 +193,15 @@ vim.keymap.set("n", "<Leader>o", ":DashboardNewFile<CR>", { silent = true })
 
 -- Snippets
 local luasnip = require "luasnip"
+local postfix = require("luasnip.extras.postfix").postfix
+local extras = require("luasnip.extras")
+local l = extras.l
+
+postfix(".tk", {
+		l("[" .. l.POSTFIX_MATCH .. "]"),
+})
+
+
 local cmp = require "cmp"
 cmp.setup {
 	snippet = {
@@ -320,6 +330,7 @@ local servers = {
 	"html",
 	"tsserver",
 	"emmet_ls",
+	"intelephense",
 }
 local has_formatter = { "gopls", "html", "tsserver" }
 require("mason-lspconfig").setup {
