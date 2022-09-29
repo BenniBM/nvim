@@ -82,7 +82,7 @@ local lang_maps = {
 	cpp = { build = "g++ % -o %:r", exec = "./%:r" },
 	typescript = { exec = "bun %" },
 	javascript = { exec = "bun %" },
-	python = { exec = "python %" },
+	python = { exec = "python3 %" },
 	java = { build = "javac %", exec = "java %:r" },
 	sh = { exec = "./%" },
 	go = { build = "go build", exec = "go run %" },
