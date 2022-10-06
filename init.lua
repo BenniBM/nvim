@@ -46,10 +46,10 @@ vim.o.lazyredraw = true
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.scrolloff = 8
-vim.o.shiftwidth = 2
 vim.o.splitbelow = true
 vim.o.splitright = true
-vim.o.tabstop = 2
+vim.o.shiftwidth = 3
+vim.o.tabstop = 3
 vim.o.termguicolors = true
 vim.o.updatetime = 100
 vim.o.swapfile = false
@@ -71,8 +71,6 @@ vim.keymap.set("n", "<Leader>k", ":bnext<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>q", ":bprevious<CR>:bdelete #<CR>", { silent = true })
 vim.keymap.set("n", "<Leader>y", ":%y<CR>")
 vim.keymap.set("n", "<Leader>x", ":Lex<CR>:vertical resize 30<CR>")
-vim.keymap.set("n", "k", "gk", { silent = true })
-vim.keymap.set("n", "j", "gj", { silent = true })
 vim.keymap.set("n", "<Leader>l", ":vsplit term://zsh <CR>", { silent = true })
 vim.keymap.set("t", "<Leader><Esc>", "<C-\\><C-n>", { silent = true })
 vim.keymap.set("n", "<Leader>v", ":edit ~/.config/nvim/init.lua<CR>", { silent = true })
@@ -82,7 +80,7 @@ local lang_maps = {
 	cpp = { build = "g++ % -o %:r", exec = "./%:r" },
 	typescript = { exec = "bun %" },
 	javascript = { exec = "bun %" },
-	python = { exec = "python %" },
+	python = { exec = "python3 %" },
 	java = { build = "javac %", exec = "java %:r" },
 	sh = { exec = "./%" },
 	go = { build = "go build", exec = "go run %" },
@@ -265,7 +263,14 @@ require("lualine").setup {
 	},
 }
 
--- Language Server
+----------------------------------------------------
+-----------------Language Servers-------------------
+----------------------------------------------------
+
+-- LSP config from nvim
+local lspconfig = require "lspconfig"
+
+-- Language Server for diagnostics, formatting 
 local null_ls = require "null-ls"
 null_ls.setup {
 	sources = {
@@ -287,8 +292,6 @@ require("gitsigns").setup {
 	},
 }
 
--- LSP
-local lspconfig = require "lspconfig"
 
 -- Telescope fuzzy finder
 local telescope = require "telescope"
@@ -306,7 +309,7 @@ vim.keymap.set("n", "<Leader>n", telescope.extensions.file_browser.file_browser)
 vim.keymap.set("n", "<Leader>f", require("telescope.builtin").find_files)
 vim.keymap.set("n", "<Leader>t", require("telescope.builtin").treesitter)
 
--- Treesitter
+-- Treesitter Syntax Highlighting
 require("nvim-treesitter.configs").setup {
 	ensure_installed = {
 		"bash",
@@ -326,7 +329,6 @@ require("mason").setup {}
 local servers = {
 	"bashls",
 	"cssls",
-	"gopls",
 	"html",
 	"tsserver",
 	"emmet_ls",
@@ -342,7 +344,7 @@ local opts = {
 		vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 		local opts = { buffer = bufnr }
 		vim.keymap.set("n", "<Leader>h", vim.lsp.buf.hover, opts)
-		vim.keymap.set("n", "<Leader>i", vim.lsp.buf.definition, opts)
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 		vim.keymap.set("n", "<Leader>r", vim.lsp.buf.rename, opts)
 		local should_format = true
 		for _, value in pairs(has_formatter) do
